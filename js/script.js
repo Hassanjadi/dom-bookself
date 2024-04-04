@@ -45,6 +45,32 @@ function findBook(bookId) {
   return null;
 }
 
+function removeBookshelfList(bookId) {
+  const bookTarget = findBookIndex(bookId);
+
+  if (bookTarget === -1) return;
+
+  books.splice(bookTarget, 1);
+  document.dispatchEvent(new Event(RENDER_EVENT));
+}
+
+function unreadBookshelfList(bookId) {
+  const bookTarget = findBook(bookId);
+
+  if (bookTarget == null) return;
+
+  bookTarget.isComplete = false;
+  document.dispatchEvent(new Event(RENDER_EVENT));
+}
+
+function findBookIndex(bookId) {
+  for (const index in books) {
+    if (books[index].id === bookId) {
+      return index;
+    }
+  }
+}
+
 function makeBook(bookObject) {
   const titleBook = document.createElement("h3");
   titleBook.innerText = bookObject.title;

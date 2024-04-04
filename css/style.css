@@ -226,7 +226,7 @@ p {
   justify-content: space-between;
 }
 
-.book_shelf > .book_list > .book_list_item > .book_item > .action > button {
+.book_shelf > .book_list > .book_list_item > .book_item > button {
   border: 0;
   cursor: pointer;
 }
@@ -236,7 +236,7 @@ p {
   color: white;
   padding: 8px 24px;
   border: none;
-  margin-right: 16px;
+  margin-right: 24px;
 }
 
 .book_shelf > .book_list > .book_list_item > .book_item > .delete_button {
@@ -244,4 +244,11 @@ p {
   border: 1px solid coral;
   padding: 8px 24px;
   color: coral;
+}
+
+.book_shelf > .book_list > .book_list_item > .book_item > .unread_button {
+  background-color: coral;
+  color: white;
+  padding: 8px 24px;
+  margin-right: 8px;
 }

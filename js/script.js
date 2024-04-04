@@ -67,6 +67,7 @@ function makeBook(bookObject) {
   if (bookObject.isComplete) {
     const unreadButton = document.createElement("button");
     unreadButton.classList.add("unread_button");
+    unreadButton.innerText = "Unread";
 
     unreadButton.addEventListener("click", function () {
       unreadBookshelfList(bookObject.id);
@@ -74,12 +75,13 @@ function makeBook(bookObject) {
 
     const deleteButton = document.createElement("button");
     deleteButton.classList.add("delete_button");
+    deleteButton.innerText = "Delete";
 
     deleteButton.addEventListener("click", function () {
       removeBookshelfList(bookObject.id);
     });
 
-    bookList.append(unreadButton, deleteButton);
+    bookItem.append(unreadButton, deleteButton);
   } else {
     const readButton = document.createElement("button");
     readButton.classList.add("read_button");
@@ -132,15 +134,23 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener(RENDER_EVENT, function () {
+  console.info(books);
   const incompleteBookshelfList = document.getElementById(
     "incompleteBookshelfList"
   );
-  incompleteBookshelfList.innerText = "";
+  incompleteBookshelfList.innerHTML = "";
+
+  const completeBookshelfList = document.getElementById(
+    "completeBookshelfList"
+  );
+  completeBookshelfList.innerHTML = "";
 
   for (const bookItem of books) {
     const bookElement = makeBook(bookItem);
     if (!bookItem.isComplete) {
       incompleteBookshelfList.append(bookElement);
+    } else {
+      completeBookshelfList.append(bookElement);
     }
   }
 });

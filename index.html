@@ -28,12 +28,13 @@
             We make reading more exciting and convenient by offering access to
             thousands of titles from various genres on our website
           </p>
-          <a href="#">Add Bookshelf</a>
+          <a href="#searchBook">Add Bookshelf</a>
         </div>
         <div class="hero_image">
           <img src="img/hero_images.png" alt="" />
         </div>
       </section>
+
       <section class="input_section">
         <h2>Enter a new book</h2>
         <form id="inputBook">
@@ -57,43 +58,30 @@
         </form>
       </section>
 
-      <!-- <section class="search_section">
-    <h2>Cari Buku (Opsional)</h2>
-    <form id="searchBook">
-      <label for="searchBookTitle">Judul</label>
-      <input id="searchBookTitle" type="text">
-      <button id="searchSubmit" type="submit">Cari</button>
-    </form>
-  </section> -->
+      <section class="search_section">
+        <form id="searchBook">
+          <input id="searchBookTitle" type="text" placeholder="Search Title" />
+          <button id="searchSubmit" type="submit">Cari</button>
+        </form>
+      </section>
 
       <section class="book_shelf">
         <h2>Not finished reading the book</h2>
-        <div id="incompleteBookshelfList" class="book_list">
-          <!-- <article class="book_item">
-            <h3>Book Title</h3>
-            <p>Penulis: John Doe</p>
-            <p>Tahun: 2002</p>
-            <div class="action">
-              <button class="green">Done</button>
-              <button class="red">Delete</button>
-            </div>
-          </article> -->
-        </div>
+        <div id="incompleteBookshelfList" class="book_list"></div>
       </section>
 
       <section class="book_shelf">
         <h2>Finished reading the book</h2>
+        <div id="completeBookshelfList" class="book_list"></div>
+      </section>
 
-        <div id="completeBookshelfList" class="book_list">
-          <!-- <article class="book_item">
-            <h3>Book Title</h3>
-            <p>Penulis: John Doe</p>
-            <p>Tahun: 2002</p>
-            <div class="action">
-              <button class="green">Unread</button>
-              <button class="red">Delete</button>
-            </div>
-          </article> -->
+      <section id="custom-dialog" class="custom-dialog">
+        <div class="dialog-content">
+          <p>Are you sure you want to delete this book?</p>
+          <div class="button-container">
+            <button id="confirm-delete">Delete</button>
+            <button id="cancel-delete">Cancel</button>
+          </div>
         </div>
       </section>
     </main>

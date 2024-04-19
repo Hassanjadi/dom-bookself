@@ -34,7 +34,6 @@ button {
 }
 
 main {
-  /* max-width: 800px; */
   width: 80%;
   margin: 0 auto;
   padding: 16px;
@@ -85,15 +84,6 @@ main {
 .hero_image img {
   width: 80%;
   height: auto;
-}
-
-.input_section {
-  /* margin: 32px 0;
-  display: flex;
-  flex-direction: column;
-  padding: 16px;
-  border: 1px solid black;
-  border-radius: 10px; */
 }
 
 .input_section > h2 {
@@ -147,13 +137,10 @@ main {
 }
 
 .search_section {
-  margin: 16px 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 16px;
-  border: 1px solid black;
   border-radius: 10px;
+  margin-top: 72px;
 }
 
 .search_section > h2 {
@@ -161,25 +148,19 @@ main {
 }
 
 .search_section > form {
-  padding: 16px;
-  width: 100%;
-  display: grid;
-  grid-template-columns: auto 1fr 0.5fr;
-  grid-gap: 10px;
-}
-
-.search_section > form > label {
   display: flex;
-  align-items: center;
+  gap: 16px;
 }
 
 .search_section > form > input {
-  padding: 5px;
+  padding: 8px 16px;
   border-radius: 5px;
+  border: 1px solid #dcdcdc;
 }
 
 .search_section > form > button {
-  background-color: cornflowerblue;
+  background-color: coral;
+  padding: 8px 40px;
   color: white;
   border: 0;
   border-radius: 5px;
@@ -188,10 +169,6 @@ main {
 
 .book_shelf {
   margin: 32px 0;
-  /* margin: 16px 0 0 0;
-  border: 1px solid black;
-  padding: 16px;
-  border-radius: 10px; */
 }
 
 .book_shelf > h2 {
@@ -251,4 +228,51 @@ p {
   color: white;
   padding: 8px 24px;
   margin-right: 8px;
+}
+
+.custom-dialog {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  max-width: 80%;
+  padding: 20px;
+  border-radius: 5px;
+  z-index: 9999;
+}
+
+.dialog-content {
+  background-color: white;
+  width: 300px;
+  padding: 36px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.button-container {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button#confirm-delete {
+  width: 50%;
+  background-color: coral;
+  color: white;
+}
+
+button#cancel-delete {
+  border-color: 1px solid #ff7f50;
+  color: black;
+  width: 50%;
 }

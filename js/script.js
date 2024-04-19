@@ -33,6 +33,7 @@ function addBookselfToCompleted(bookId) {
   if (bookTarget == null) return;
 
   bookTarget.isComplete = true;
+  saveBooksToLocalStorage();
   document.dispatchEvent(new Event(RENDER_EVENT));
 }
 
@@ -71,6 +72,7 @@ function removeBookshelfList(bookId) {
   showCustomDialog(function (confirmed) {
     if (confirmed) {
       books.splice(bookTarget, 1);
+      saveBooksToLocalStorage();
       document.dispatchEvent(new Event(RENDER_EVENT));
     }
   });
@@ -82,6 +84,7 @@ function unreadBookshelfList(bookId) {
   if (bookTarget == null) return;
 
   bookTarget.isComplete = false;
+  saveBooksToLocalStorage();
   document.dispatchEvent(new Event(RENDER_EVENT));
 }
 
@@ -170,10 +173,24 @@ function addBook() {
   );
   books.push(bookObject);
 
+  saveBooksToLocalStorage();
   document.dispatchEvent(new Event(RENDER_EVENT));
 }
 
+function saveBooksToLocalStorage() {
+  localStorage.setItem("books", JSON.stringify(books));
+}
+
+function loadBooksFromLocalStorage() {
+  const storedBooks = localStorage.getItem("books");
+  if (storedBooks) {
+    books.push(...JSON.parse(storedBooks));
+    document.dispatchEvent(new Event(RENDER_EVENT));
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
+  loadBooksFromLocalStorage();
   const submitForm = document.getElementById("inputBook");
   submitForm.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -196,9 +213,9 @@ document.addEventListener(RENDER_EVENT, function () {
   for (const bookItem of books) {
     const bookElement = makeBook(bookItem);
     if (!bookItem.isComplete) {
-      incompleteBookshelfList.append(bookElement);
+      incompleteBookshelfList.appendChild(bookElement);
     } else {
-      completeBookshelfList.append(bookElement);
+      completeBookshelfList.appendChild(bookElement);
     }
   }
 });

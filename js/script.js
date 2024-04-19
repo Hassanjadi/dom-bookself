@@ -45,13 +45,35 @@ function findBook(bookId) {
   return null;
 }
 
+function showCustomDialog(callback) {
+  const dialog = document.getElementById("custom-dialog");
+  dialog.style.display = "block";
+
+  const confirmDeleteButton = document.getElementById("confirm-delete");
+  const cancelDeleteButton = document.getElementById("cancel-delete");
+
+  confirmDeleteButton.addEventListener("click", function () {
+    dialog.style.display = "none";
+    callback(true);
+  });
+
+  cancelDeleteButton.addEventListener("click", function () {
+    dialog.style.display = "none";
+    callback(false);
+  });
+}
+
 function removeBookshelfList(bookId) {
   const bookTarget = findBookIndex(bookId);
 
   if (bookTarget === -1) return;
 
-  books.splice(bookTarget, 1);
-  document.dispatchEvent(new Event(RENDER_EVENT));
+  showCustomDialog(function (confirmed) {
+    if (confirmed) {
+      books.splice(bookTarget, 1);
+      document.dispatchEvent(new Event(RENDER_EVENT));
+    }
+  });
 }
 
 function unreadBookshelfList(bookId) {
@@ -180,3 +202,41 @@ document.addEventListener(RENDER_EVENT, function () {
     }
   }
 });
+
+function searchBooks(title) {
+  const searchResult = books.filter((book) =>
+    book.title.toLowerCase().includes(title.toLowerCase())
+  );
+  return searchResult;
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const searchForm = document.getElementById("searchBook");
+  searchForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const searchInput = document.getElementById("searchBookTitle").value;
+    const searchResult = searchBooks(searchInput);
+    renderSearchResult(searchResult);
+  });
+});
+
+function renderSearchResult(results) {
+  const incompleteBookshelfList = document.getElementById(
+    "incompleteBookshelfList"
+  );
+  const completeBookshelfList = document.getElementById(
+    "completeBookshelfList"
+  );
+
+  incompleteBookshelfList.innerHTML = "";
+  completeBookshelfList.innerHTML = "";
+
+  results.forEach((bookItem) => {
+    const bookElement = makeBook(bookItem);
+    if (!bookItem.isComplete) {
+      incompleteBookshelfList.appendChild(bookElement);
+    } else {
+      completeBookshelfList.appendChild(bookElement);
+    }
+  });
+}
